@@ -1,8 +1,8 @@
 # Querygazer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/querygazer`. To experiment with that code, run `bin/console` for an interactive prompt.
+Repeated Query Runner - for monitoring, operation and CI.
 
-TODO: Delete this and the text above, and describe your gem
+This gem has a query definition DSL using RSpec.
 
 ## Installation
 
@@ -22,7 +22,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+describe dataset("example_database") do
+  describe query("SELECT count(*) FROM mytable1") do
+    it { should be_successful }
+    its(:result) { should be_more_than(100) }
+  end
+
+  describe assert("(SELECT count(*) FROM mytable2) > 5",
+                  as: "mytable2 has more than 5 records") do
+    it { should be_successful }
+  end
+end
+```
 
 ## Development
 
