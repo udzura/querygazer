@@ -5,6 +5,7 @@ require "google/cloud/bigquery"
 require "querygazer/version"
 require "querygazer/dataset"
 require "querygazer/query"
+require "querygazer/result"
 require "querygazer/kernel_ext"
 require "querygazer/example_group_ext"
 
