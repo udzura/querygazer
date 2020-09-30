@@ -1,4 +1,5 @@
 require "rspec"
+require "rspec/expectations"
 require "rspec/its"
 require "google/cloud/bigquery"
 require "querygazer/version"

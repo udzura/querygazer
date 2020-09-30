@@ -6,3 +6,8 @@
 /pkg/
 /spec/reports/
 /tmp/
+
+.ruby-version
+.python-version
+.example/
+secrets-*.json
