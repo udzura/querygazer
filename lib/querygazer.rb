@@ -9,13 +9,11 @@ require "querygazer/example_group_ext"
 
 module Querygazer
   class << self
-    def setup!(credentials: nil, &blk)
+    def setup!(**opts, &blk)
       if blk
         Google::Cloud::Bigquery.configure(&blk)
-        @client ||= Google::Cloud::Bigquery.new
-      else
-        @client ||= Google::Cloud::Bigquery.new(credentials: credentials)
       end
+      @client ||= Google::Cloud::Bigquery.new(**opts)
     end
 
     def client
