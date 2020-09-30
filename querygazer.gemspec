@@ -26,7 +26,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rspec', '~> 3.0'
   spec.add_dependency 'rspec-its'
-  spec.add_dependency 'rspec-expectations'
+  spec.add_dependency 'rspec-expectations', '~> 3.0'
+  spec.add_dependency 'rspec-mocks', '~> 3.0'
   spec.add_dependency 'google-cloud-storage', '~> 1.0'
   spec.add_dependency 'google-cloud-bigquery', '~> 1.0'
 end
