@@ -1,8 +1,8 @@
 module Querygazer
   module ExampleGroupExt
     def query(sql)
-      dataset = metadata[:described_class].name
-      Query.new(sql: sql, dataset: dataset)
+      cli = metadata[:described_class].cli
+      Query.new(sql: sql, cli: cli)
     end
   end
 end

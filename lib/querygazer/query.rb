@@ -1,8 +1,8 @@
 module Querygazer
   class Query
-    def initialize(sql:, dataset:)
+    def initialize(sql:, cli:)
       @sql = sql
-      @dataset_cli = Querygazer.client.dataset(dataset)
+      @dataset_cli = cli
     end
 
     def to_s
