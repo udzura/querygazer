@@ -14,19 +14,14 @@ module Querygazer
       @successful
     end
 
-    def raw_result
-      called? || lazy_call
-      @raw_result
-    end
-
     def result
-      r = raw_result[0]
-      r.size == 1 ? r.values[0] : r
+      called? || lazy_call
+      @result
     end
 
     private
     def lazy_call
-      @raw_result = Result.new(@dataset_cli.query(@sql))
+      @result = Result.new(@dataset_cli.query(@sql))
       @successful = true
     rescue => e
       @query_error = e
@@ -37,6 +32,16 @@ module Querygazer
 
     def called?
       !! @__called__
+    end
+
+    def method_missing(name, *a, **b)
+      if name =~ /^(?:\w|_)+\[((?:\w|_)+)\]$/
+        key = $1
+        key = key.to_i if key =~ /^\d+$/
+        self.result[key]
+      else
+        super
+      end
     end
   end
 end
