@@ -1,5 +1,7 @@
 # Querygazer
 
+![Ruby](https://github.com/udzura/querygazer/workflows/Ruby/badge.svg?branch=master) 
+
 Repeated Query Runner - for monitoring, operation and CI.
 
 This gem has a query definition DSL using RSpec.
