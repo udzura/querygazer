@@ -8,30 +8,32 @@ module Querygazer
       @raw_result = raw_result
       @empty_result = false
       @single_record = false
+      @record = extract_result
     end
-    attr_reader :raw_result
+    attr_reader :raw_result, :record
 
-    def record
-      @record ||= extract_result
+    def value
+      record.values[0]
     end
 
     def extract_result
       case raw_result.size
       when 0
         @empty_result = true
-        raw_result
+        {}
       when 1
-        @single_record = true
+        @single_record = (raw_result[0].keys.size == 1)
         raw_result[0]
       else
-        raw_result
+        # record should be first record
+        raw_result[0]
       end
     end
 
     def [](key)
       case key
       when Numeric
-        raw_result[key]
+        raw_result[key].values
       when Symbol, String
         record[key.to_sym]
       else
@@ -48,7 +50,25 @@ module Querygazer
       raw_result
     end
 
-    def_delegators :record, :<, :<=, :>, :>=, :eq, :==
-    def_delegators :to_a ,:first, :last, :size
+    [
+      :<, :<=, :>, :>=, :==, :eq, # for be <, be >=, ...
+      :-, :+ # for be_within
+    ].each do |op|
+      define_method op do |arg0|
+        if arg0.is_a?(Hash) || arg0.is_a?(Array)
+          self.record.send(op, arg0)
+        else
+          self.value.send(op, arg0)
+        end
+      end
+    end
+
+    [:first, :last].each do |msg|
+      define_method msg do
+        self.to_records.send(msg).values
+      end
+    end
+
+    def_delegators :to_records, :size, :length, :count
   end
 end

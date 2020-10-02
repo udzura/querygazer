@@ -1,9 +1,14 @@
+require 'forwardable'
+
 module Querygazer
   class Query
+    extend Forwardable
+
     def initialize(sql:, cli:)
       @sql = sql
       @dataset_cli = cli
     end
+    attr_reader :sql
 
     def to_s
       "Query #{@sql.inspect}"
@@ -18,6 +23,10 @@ module Querygazer
       called? || lazy_call
       @result
     end
+
+    def_delegators :result, :[],
+                   :first, :last,
+                   :size, :length, :count
 
     private
     def lazy_call

@@ -18,6 +18,17 @@ module Querygazer
       @client ||= Google::Cloud::Bigquery.new(**opts)
     end
 
+    def __setup__mocks!
+      client = Object.new # singleton
+      dataset = Object.new # singleton
+      client.define_singleton_method :dataset do |*arg|
+        dataset
+      end
+
+      @dataset = dataset
+      @client = client
+    end
+
     def client
       @client
     end
