@@ -1,6 +1,6 @@
 # Querygazer
 
-![Ruby](https://github.com/udzura/querygazer/workflows/Ruby/badge.svg?branch=master) 
+[![Ruby](https://github.com/udzura/querygazer/workflows/Ruby/badge.svg?branch=master)](https://github.com/udzura/querygazer/actions) [![Gem Version](https://badge.fury.io/rb/querygazer.svg)](https://badge.fury.io/rb/querygazer)
 
 Repeated Query Runner - for monitoring, operation and CI.
 
