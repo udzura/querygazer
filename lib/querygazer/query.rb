@@ -30,7 +30,7 @@ module Querygazer
 
     private
     def lazy_call
-      @result = Result.new(@dataset_cli.query(@sql))
+      @result = Result.new(@dataset_cli.query(@sql, cache: false))
       @successful = true
     rescue => e
       @query_error = e
